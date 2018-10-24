@@ -2,16 +2,10 @@ package trabalho_mateus;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class metodo extends JFrame{
     
@@ -97,15 +91,23 @@ public class metodo extends JFrame{
             
             float entrada = Float.parseFloat(text1.getText());
             
-            String valor_ope = "" + entrada;
-            String[] valores = null;
+            System.out.println(entrada);
             
-            valores = valor_ope.split(Pattern.quote("."));
+            String comp = "" + entrada;
             
-            text2.setText(opera.binario(valores[0], "0." + valores[1]));
-            text4.setText(opera.octal(valores[0], "0." + valores[1]));
-            text3.setText(opera.hexadecimal(valores[0], "0." + valores[1]));
-        }    
+            if(!comp.equals("0.0")) {
+            
+                String valor_ope = "" + entrada;
+                String[] valores = null;
 
+                valores = valor_ope.split(Pattern.quote("."));
+                
+                text2.setText(opera.binario(valores[0], "0." + valores[1]));
+                text4.setText(opera.octal(valores[0], "0." + valores[1]));
+                text3.setText(opera.hexadecimal(valores[0], "0." + valores[1]));
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor entre com um valor diferente de 0!");
+            }
+        }
     }
 }

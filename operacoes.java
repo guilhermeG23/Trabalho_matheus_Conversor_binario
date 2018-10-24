@@ -30,24 +30,28 @@ public class operacoes {
         }
 
         //Ponto flutuante de binario
-        for(int t = 0; t < 10; t++) {
-            int contador = 0;
-            while(y != 1) {
-                y = 2 * y;
-                if(y > 1) {
-                    quebrado = quebrado + "1";
-                    y = y - 1;
-                } else if(y == 1) {
-                    quebrado = quebrado + "1";
-                    break;
-                } else {
-                    quebrado = quebrado + "0";
+        if(y != 0) {
+            for(int t = 0; t < 10; t++) {
+                int contador = 0;
+                while(y != 1) {
+                    y = 2 * y;
+                    if(y > 1) {
+                        quebrado = quebrado + "1";
+                        y = y - 1;
+                    } else if(y == 1) {
+                        quebrado = quebrado + "1";
+                        break;
+                    } else {
+                        quebrado = quebrado + "0";
+                    }
+                    if(contador == 10) {
+                        break;
+                    }
+                    contador++;
                 }
-                if(contador == 10) {
-                    break;
-                }
-                contador++;
             }
+        } else {
+            quebrado = "0";
         }
         return binario + "." + quebrado;
     }
@@ -113,25 +117,29 @@ public class operacoes {
         
         if(y != 0) {
             quebrado = "" + (16 * y);
+        } else {
+            quebrado = "0";
         } 
 
-        //Soma valores do inteiro + o quebrado
-        float quebrado_valor = (float) (x + Float.parseFloat(quebrado));
+        //Converção do valor para hexadecimal
+        if(x != 0) {
 
-        String valor_quebrado = "" + quebrado;
-        String[] valores = valor_quebrado.split(Pattern.quote("."));
-        
-        if(valores[1].equals("0")) {
-            valores[1] = "";
-        } else {
-            valores[1] = "." + valores[1];
-        }
+            //Soma valores do inteiro + o quebrado
+            float quebrado_valor = 0;
+            String valor_quebrado = null;
+            String[] valores = null;
+            
+            if(!quebrado.equals("0")) {
+                quebrado_valor = (float) (x + Float.parseFloat(quebrado));
+                valor_quebrado = "" + quebrado;
+                valores = valor_quebrado.split(Pattern.quote("."));
+            } else {
+                quebrado_valor = (float) (x);
+            }
 
-        //Valor com soma
-        x = (int) (quebrado_valor);
+            //Valor com soma
+            x = (int) (quebrado_valor);
 
-
-            //Converção do valor para hexadecimal
             if(x > 16) {
                 while(x > 16) {
 
@@ -190,6 +198,17 @@ public class operacoes {
             } else {
                 hexa = "" + x;
             }
-            return hexa + valores[1];
+            if(!quebrado.equals("0")) {
+                return hexa + "." + valores[1];
+            } else {
+                return hexa;
+            }
+        } else {
+            if(quebrado.equals("0")) {
+                return "0";
+            } else {
+                return quebrado;
+            }
+        }
     }
 }
